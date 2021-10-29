@@ -32,7 +32,7 @@ public class LogAdvice {
 //    }
 
     //Around가 진짜 기능이 많네
-    //
+    // execution 표현식 해석 : 접근제한자 생략?, 리턴 타입 상관 없이(*), 해당 경로 패턴(패키지명*.*),파라미터 1개 이상(..)인 모든 메서드에 대해 적용된다.
     @Around("execution(* com.example.demo.service.SampleService*.*(..))")
     public Object logTime(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
         long start = System.currentTimeMillis();
@@ -44,7 +44,7 @@ public class LogAdvice {
         log.info("method signature :" + proceedingJoinPoint.getSignature());
         log.info("source location? :" + proceedingJoinPoint.getSourceLocation());
 
-        Object result = proceedingJoinPoint.proceed();
+        Object result = proceedingJoinPoint.proceed();  //핵심 로직(Target) 호출
 
         long end = System.currentTimeMillis();
 
